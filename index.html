@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pantry Paintings Shop</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap">
+<style>
+/* Layout: stacked full-width bands (announce, header, hero, club, prints row, originals row, gift card, footer); cobalt "dinnerware" accent on a pale celadon ground */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --surface:#FAFAF8; --ink:#141414; --muted:#7A7A76; --line:#E6E6E2;
+  --accent:#141414; --accent-ink:#FFFFFF; --lemon:#141414; --sold:#A33A2B;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:300 15px/1.7 var(--body);letter-spacing:.01em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+h1,h2,h3{font-family:var(--display);font-weight:300;text-wrap:balance;margin:0;line-height:1.05}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:300;font-style:italic}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{display:inline-block;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);padding:1em 2em;border-radius:0;border-width:1px;font-weight:400;text-transform:uppercase;letter-spacing:.22em;font-size:.7rem;transition:background .25s,color .25s;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{background:transparent;color:var(--ink)}.btn.ghost:hover{background:var(--ink);color:#fff}
+.eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.68rem;color:var(--muted);font-weight:400;margin:0 0 .8rem}
+
+/* announce + header */
+.announce{background:var(--ink);color:#fff;text-align:center;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;padding-block:.7rem}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.hdr{display:flex;align-items:center;gap:1.5rem;padding-block:1.4rem}
+.logo{font-family:var(--display);font-weight:400;font-size:1.7rem;letter-spacing:.02em;margin-right:auto}
+.logo span{font-style:italic}
+nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+nav li{position:relative}
+nav a{text-decoration:none}
+nav a:hover{color:var(--accent)}
+.dd{display:none;position:absolute;top:100%;left:-1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.6rem 1rem;min-width:170px;columns:2;column-gap:1.4rem;box-shadow:0 10px 30px rgb(0 0 0/.12)}
+nav li:hover .dd,nav li:focus-within .dd{display:block}
+.dd a{display:block;padding:.2rem 0;font-size:.88rem}
+.icons{display:flex;gap:.4rem;align-items:center}
+.iconbtn{background:none;border:0;border-radius:0;padding:.35rem .4rem;cursor:pointer;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+.count{margin-left:.4em}.count::before{content:"("}.count::after{content:")"}
+@media (max-width:860px){nav{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding-block:5rem}
+.hero h1{font-size:clamp(3.5rem,9vw,7.5rem);font-weight:300;font-style:italic;letter-spacing:-.02em;margin-bottom:1.2rem}
+.hero p{max-width:42ch;color:var(--muted);font-size:1.08rem}
+.hero .ctas{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem}
+.hero .art{overflow:hidden}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+
+/* club */
+.club{background:var(--surface)}
+.club .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;align-items:center;padding-block:5rem}
+.club .stat{font-family:var(--display);font-size:3.4rem;font-weight:300;color:var(--ink);margin-top:1.5rem;font-variant-numeric:tabular-nums}
+.plans{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.2rem 0}
+.plan{flex:1 1 180px;border:1px solid var(--line);border-radius:0;padding:.9rem 1rem;cursor:pointer}
+.plan:has(input:checked){border-color:var(--accent)}
+.plan input{accent-color:var(--accent)}
+.plan b{font-family:var(--display);font-weight:400;font-size:1.8rem}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:end}
+label.f{display:grid;gap:.25rem;font-size:.85rem;color:var(--muted)}
+.f select,.f input,.f textarea{background:var(--bg);border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:.55rem 0;color:var(--ink)}
+.stepper{display:inline-flex;border:1px solid var(--line);border-radius:0;overflow:hidden}
+.stepper button{background:var(--bg);border:0;width:2.2rem;cursor:pointer}
+.stepper output{min-width:2.4rem;text-align:center;padding:.55rem 0;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.club .wrap{grid-template-columns:1fr}}
+
+/* product rows */
+section.shelf{padding-block:5rem}
+.shelf-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:2.5rem}
+.pager{display:flex;align-items:center;gap:.5rem;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem}
+.pager button{border:1px solid var(--line);background:transparent;border-radius:0;width:2.2rem;height:2.2rem;cursor:pointer}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*2rem)/4);gap:2rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.track::-webkit-scrollbar{display:none}
+@media (max-width:900px){.track{grid-auto-columns:calc((100% - 2rem)/2)}}
+@media (max-width:480px){.track{grid-auto-columns:80%}}
+.card{scroll-snap-align:start;display:grid;gap:.45rem;min-width:0}
+.card .art{position:relative;overflow:hidden;background:var(--surface);margin-bottom:.6rem}
+.card .art svg{display:block;width:100%;height:auto;transition:transform .8s ease}
+.card:hover .art svg{transform:scale(1.04)}
+.badge{position:absolute;top:.8rem;left:.8rem;background:#fff;color:var(--ink);font-size:.6rem;text-transform:uppercase;letter-spacing:.22em;padding:.3rem .6rem;font-weight:400}
+.badge.sold{background:#fff;color:var(--sold)}
+.card h3{font-size:1.35rem;font-weight:400}
+.meta{color:var(--muted);font-size:.85rem}
+.price{font-variant-numeric:tabular-nums;font-weight:400;font-size:.9rem}
+.price s{color:var(--muted);font-weight:400;margin-left:.4em}
+.card .add{justify-self:start;padding:0;border:0;border-bottom:1px solid var(--ink);background:none;color:var(--ink);font-size:.62rem;margin-top:.3rem}.card .add:hover{background:none;color:var(--muted)}
+.card .add[disabled]{opacity:.45;cursor:not-allowed}
+
+/* gift card */
+.gift{background:var(--surface)}
+.gift .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;padding-block:5rem}
+.denoms{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 1rem}
+.denoms label{border:1px solid var(--line);border-radius:0;padding:.35rem .9rem;cursor:pointer;font-variant-numeric:tabular-nums}
+.denoms label:has(input:checked){background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.denoms input{position:absolute;opacity:0;pointer-events:none}
+.gcard{aspect-ratio:1.6;max-width:100%;border-radius:0;background:var(--ink);color:var(--accent-ink);padding:1.4rem;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--display)}
+.gcard b{font-size:3.6rem;font-weight:300;font-style:italic;font-variant-numeric:tabular-nums}
+.recipient{display:grid;gap:.7rem;margin-top:.8rem}
+@media (max-width:760px){.gift .wrap{grid-template-columns:1fr}}
+
+/* footer */
+footer{padding-block:5rem 2rem;font-size:.85rem;border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:2rem}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:.3rem}
+.signup{display:flex;gap:.5rem;margin-top:.6rem}
+.signup input{flex:1;min-width:0;background:none;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:.6rem 0}
+.legal{border-top:1px solid var(--line);margin-top:2rem;padding-top:1rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgb(0 0 0/.35);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--surface);z-index:21;display:flex;flex-direction:column;padding:calc(1.2rem + env(safe-area-inset-top,0px)) calc(1.2rem + env(safe-area-inset-right,0px)) calc(1.2rem + env(safe-area-inset-bottom,0px)) 1.2rem;box-shadow:-10px 0 40px rgb(0 0 0/.2)}
+.drawer ul{list-style:none;padding:0;margin:1rem 0;display:grid;gap:.8rem;overflow:auto;flex:1}
+.drawer li{display:grid;grid-template-columns:56px 1fr auto;gap:.7rem;align-items:center}
+.drawer li svg{width:56px;height:auto}
+.drawer .tot{display:flex;justify-content:space-between;font-weight:600;font-size:1.1rem;border-top:1px solid var(--line);padding-top:.8rem;font-variant-numeric:tabular-nums}
+.toast{position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:.8rem 1.4rem;border-radius:0;letter-spacing:.06em;z-index:30;font-size:.9rem}
+.demo{font-size:.75rem;color:var(--muted);text-align:center;padding-block:.4rem}
+
+/* ---- hover polish ---- */
+:root{--ease:cubic-bezier(.22,.61,.36,1)}
+/* links: hairline underline drawn left to right */
+nav a,.foot a,.dd a,.announce a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .45s var(--ease),color .3s}
+nav a:hover,.foot a:hover,.dd a:hover,.announce a:hover{background-size:100% 1px;color:var(--ink)}
+.announce a{color:#fff;background-size:100% 1px}
+.announce a:hover{background-size:0 1px;color:#fff}
+/* dropdown fades down instead of popping */
+.dd{display:block;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;border-radius:0;box-shadow:0 20px 40px rgb(0 0 0/.06)}
+nav li:hover .dd,nav li:focus-within .dd{opacity:1;visibility:visible;transform:none}
+/* buttons: ink fill sweeps up from the bottom */
+.btn{position:relative;overflow:hidden;z-index:0;transition:color .45s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bg);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease)}
+.btn.ghost::before{background:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--ink)}
+.btn.ghost:hover{background:transparent;color:#fff}
+.btn:hover::before{transform:scaleY(1)}
+/* product cards: slow zoom, soft veil, "View" label, title shifts */
+.card{cursor:pointer}
+.card .art svg{transition:transform 1.2s var(--ease),filter 1.2s var(--ease)}
+.card:hover .art svg{transform:scale(1.06);filter:saturate(1.1)}
+.card .art::after{content:"View";position:absolute;left:50%;bottom:1rem;transform:translate(-50%,8px);background:#fff;color:var(--ink);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;padding:.6rem 1.2rem;opacity:0;transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.card:hover .art::after{opacity:1;transform:translate(-50%,0)}
+.card h3{transition:transform .4s var(--ease)}
+.card:hover h3{transform:translateX(4px)}
+.card .add{background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;border:0;transition:background-size .45s var(--ease),letter-spacing .45s var(--ease)}
+.card .add::before{display:none}
+.card .add:hover{background-size:0 1px;letter-spacing:.3em;color:var(--ink)}
+.card .add[disabled]:hover{letter-spacing:.22em;background-size:100% 1px}
+/* hero image breathes on hover */
+.hero .art svg{display:block;transition:transform 1.6s var(--ease)}
+.hero .art:hover svg{transform:scale(1.03)}
+/* small controls */
+.pager button,.stepper button,.iconbtn{transition:background .3s,color .3s,border-color .3s}
+.pager button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.stepper button:hover{background:var(--ink);color:#fff}
+.iconbtn:hover{color:var(--muted)}
+.plan,.denoms label{transition:border-color .3s,background .3s,color .3s}
+.plan:hover,.denoms label:hover{border-color:var(--ink)}
+.gcard{transition:transform .6s var(--ease)}
+.gcard:hover{transform:translateY(-4px) rotate(-.6deg)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="announce">40 new paintings drop Saturday 9am ET. <a href="#signup">Join the list</a> to see them first.</div>
+<div class="demo wrap">Demo storefront with sample products. Nothing here is for sale.</div>
+
+<header>
+  <div class="wrap hdr">
+    <div class="logo">Pantry<span>.</span>Paintings</div>
+    <nav aria-label="Main"><ul>
+      <li><a href="#originals">Originals</a></li>
+      <li><a href="#prints">Prints ▾</a><div class="dd" id="catMenu"></div></li>
+      <li><a href="#prints">Stickers</a></li>
+      <li><a href="#club">Commissions</a></li>
+      <li><a href="#club">Print Club</a></li>
+      <li><a href="#gift">Gift cards</a></li>
+    </ul></nav>
+    <div class="icons">
+      <select id="currency" class="iconbtn" aria-label="Currency"><option>USD $</option><option>EUR €</option><option>GBP £</option><option>CAD $</option></select>
+      <button class="iconbtn" id="cartBtn">Cart<span class="count" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <p class="eyebrow">Oil on panel · painted in Lisbon</p>
+      <h1>come hungry</h1>
+      <p>Small still lifes of the things on the kitchen counter: sardine tins, split figs, a lemon going soft. Originals, giclée prints and stickers.</p>
+      <div class="ctas"><a class="btn" href="#originals">Shop original paintings</a><a class="btn ghost" href="#prints">Shop all prints</a></div>
+    </div>
+    <div class="art" id="heroArt"></div>
+  </section>
+
+  <section class="club" id="club">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Monthly subscription</p>
+        <h2>The Larder Print Club</h2>
+        <p>A new 5×7 print in your mailbox every month, picked from that month's paintings. Skip or cancel anytime.</p>
+        <div class="stat" id="members">4,812</div>
+        <div class="meta">members so far</div>
+      </div>
+      <form id="clubForm">
+        <h3 style="font-size:1.3rem">Gift a membership</h3>
+        <div class="plans">
+          <label class="plan"><input type="radio" name="plan" value="Base" data-price="8" checked> Base<br><b>$8</b> <span class="meta">/ month · 1 print</span></label>
+          <label class="plan"><input type="radio" name="plan" value="Plus" data-price="14"> Plus<br><b>$14</b> <span class="meta">/ month · 2 prints + sticker</span></label>
+        </div>
+        <div class="row">
+          <label class="f">Recipient's birthday month<select id="bday"></select></label>
+          <div class="f"><span>Months</span><div class="stepper"><button type="button" id="mMinus" aria-label="Fewer months">−</button><output id="months">3</output><button type="button" id="mPlus" aria-label="More months">+</button></div></div>
+          <button class="btn" type="submit">Add to cart · <span id="clubTotal">$24</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="shelf wrap" id="prints">
+    <div class="shelf-head">
+      <div><p class="eyebrow">Giclée on cotton rag</p><h2>Bestselling prints</h2></div>
+      <div class="pager" data-for="printTrack"><button aria-label="Previous">←</button><span>1 / 3</span><button aria-label="Next">→</button></div>
+    </div>
+    <div class="track" id="printTrack"></div>
+  </section>
+
+  <section class="shelf wrap" id="originals">
+    <div class="shelf-head">
+      <div><p class="eyebrow">One of one</p><h2>Become a collector</h2></div>
+      <div class="pager" data-for="origTrack"><button aria-label="Previous">←</button><span>1 / 2</span><button aria-label="Next">→</button></div>
+    </div>
+    <div class="track" id="origTrack"></div>
+  </section>
+
+  <section class="gift" id="gift">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Can't pick a painting?</p>
+        <h2>Send a gift card</h2>
+        <p class="meta">Delivered by email. Never expires.</p>
+        <div class="gcard" style="margin-top:1.2rem"><span>Pantry.Paintings</span><b id="gcAmt">$50</b></div>
+      </div>
+      <form id="giftForm">
+        <span class="f">Amount</span>
+        <div class="denoms" id="denoms"></div>
+        <label class="f" style="flex-direction:row;display:flex;gap:.5rem;align-items:center;color:var(--ink)"><input type="checkbox" id="asGift"> Send it to someone else</label>
+        <div class="recipient" id="recip" hidden>
+          <label class="f">Recipient email<input id="rEmail" type="email" placeholder="friend@example.com"></label>
+          <label class="f">Their name<input id="rName" placeholder="Sam"></label>
+          <label class="f">Message (<span id="msgLeft">200</span> left)<textarea id="rMsg" rows="3" maxlength="200">Happy birthday! Pick something with lemons in it.</textarea></label>
+          <label class="f">Send on<input id="rDate" type="date"></label>
+        </div>
+        <div style="margin-top:1rem"><button class="btn" type="submit">Add gift card to cart</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap" id="signup">
+  <div class="foot">
+    <div><div class="logo">Pantry<span>.</span>Paintings</div><p class="meta">Still lifes of everyday food, painted small.</p></div>
+    <ul><li><a href="#">FAQ</a></li><li><a href="#">Shipping &amp; returns</a></li><li><a href="#">Contact</a></li><li><a href="#">Portfolio</a></li></ul>
+    <form id="newsForm">
+      <b>10% off your first order</b>
+      <p class="meta" style="margin:.2rem 0 0">New paintings and drop dates, about twice a month.</p>
+      <div class="signup"><input id="newsEmail" type="email" required placeholder="you@example.com" aria-label="Email"><button class="btn" type="submit">Subscribe</button></div>
+    </form>
+  </div>
+  <div class="legal"><span>© 2026 Pantry Paintings (demo)</span><span>Visa · Mastercard · Amex · PayPal · Apple Pay</span></div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Cart">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:1.5rem">Your cart</h2><button class="iconbtn" id="closeCart">Close</button></div>
+  <ul id="cartList"></ul>
+  <div class="tot"><span>Subtotal</span><span id="cartTotal">$0</span></div>
+  <p class="meta">Shipping and taxes calculated at checkout.</p>
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="btn" id="checkout">Check out</button><button class="btn ghost" id="keepShopping">Continue shopping</button></div>
+</aside>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+// Dummy catalog data. Replace with a real API/Shopify feed later.
+const CATS=["Fruit","Seafood","Cocktails","Desserts","Bread","Cheese","Vegetables","Breakfast","Tins","More"];
+const PRINTS=[
+  ["Sardines in Oil","Tins",45,"#2C47C9","#C9D3D9","fish"],["Three Lemons","Fruit",45,"#F1C843","#E9EEF7","fruit"],
+  ["Negroni Hour","Cocktails",45,"#C2412D","#F3E3C7","glass"],["Split Fig","Fruit",45,"#6A2C5A","#E8DCCB","fruit"],
+  ["Oysters, Half Dozen","Seafood",45,"#9FA9A3","#24323A","shell"],["Pastel de Nata","Desserts",45,"#E3A63B","#F6F0E2","tart"],
+  ["Morning Toast","Breakfast",45,"#B87A3D","#D8E4EC","bread"],["Blood Oranges","Fruit",45,"#D9542C","#2F3B57","fruit"],
+  ["Anchovy Tin","Tins",45,"#7C8A8E","#F1C843","fish"],["Martini, Dry","Cocktails",45,"#C8D06E","#1F2A3A","glass"],
+  ["Pears on Blue","Fruit",45,"#B9C24A","#2C47C9","fruit"],["Lemon Tart","Desserts",45,"#F1C843","#3E5B4A","tart"]
+].map(([name,cat,price,fg,bg,shape],i)=>({id:"p"+i,name,cat,price,fg,bg,shape,from:true}));
+const ORIGINALS=[
+  ["Mackerel on Newspaper","12×16 in",1800,null,false,"#2C47C9","#E6E2D8","fish"],
+  ["Quince, Late October","8×10 in",650,800,false,"#E3B23C","#4A3B2E","fruit"],
+  ["Gin & Tonic","9×12 in",900,null,true,"#BFD8C9","#2B2F3A","glass"],
+  ["Cherries in a Bowl","6×6 in",400,null,false,"#9E1B32","#F2EFE6","fruit"],
+  ["Clams with Parsley","10×10 in",1200,null,true,"#D7CEC1","#3E5B4A","shell"],
+  ["Birthday Cake Slice","8×8 in",750,950,false,"#F3B6C4","#2C47C9","tart"],
+  ["Sourdough Heel","8×10 in",700,null,false,"#B07A3F","#EFE6D2","bread"],
+  ["Two Figs","6×8 in",450,null,false,"#5A2A4E","#D9E3D0","fruit"]
+].map(([name,size,price,was,sold,fg,bg,shape],i)=>({id:"o"+i,name,size,price,was,sold,fg,bg,shape}));
+
+// Placeholder painting drawn as SVG. Swap for <img> when real photos exist.
+function art(p,w=400,h=500){
+  const S={
+    fruit:`<circle cx="160" cy="300" r="85" fill="${p.fg}"/><circle cx="255" cy="320" r="70" fill="${p.fg}" opacity=".85"/><ellipse cx="135" cy="270" rx="22" ry="12" fill="#fff" opacity=".35"/><path d="M170 215 q10-35 35-40" stroke="#3E5B2E" stroke-width="7" fill="none"/>`,
+    fish:`<ellipse cx="200" cy="290" rx="140" ry="48" fill="${p.fg}"/><path d="M330 290 l50-40 v80z" fill="${p.fg}"/><circle cx="105" cy="280" r="9" fill="#111"/><path d="M90 300 q110 25 230 0" stroke="#fff" stroke-width="5" opacity=".4" fill="none"/>`,
+    glass:`<path d="M120 170 h160 l-20 170 h-120z" fill="${p.fg}" opacity=".9"/><rect x="190" y="340" width="20" height="70" fill="#ddd"/><rect x="140" y="405" width="120" height="12" rx="6" fill="#ddd"/><circle cx="240" cy="200" r="26" fill="#F1C843"/>`,
+    shell:`<ellipse cx="200" cy="300" rx="130" ry="85" fill="${p.fg}"/><ellipse cx="200" cy="300" rx="95" ry="55" fill="#f4efe6" opacity=".7"/><ellipse cx="200" cy="300" rx="35" ry="20" fill="#cfc6b5"/>`,
+    tart:`<path d="M80 320 h240 l-25 80 h-190z" fill="#C48A3A"/><ellipse cx="200" cy="320" rx="120" ry="38" fill="${p.fg}"/><ellipse cx="170" cy="312" rx="28" ry="9" fill="#fff" opacity=".35"/>`,
+    bread:`<path d="M70 340 q0-140 130-140 q130 0 130 140z" fill="${p.fg}"/><path d="M130 260 l30 40 M190 240 l30 45 M250 255 l25 40" stroke="#F6E7C8" stroke-width="7"/>`
+  };
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${p.name}"><rect width="${w}" height="${h}" fill="${p.bg}"/><rect y="${h*.72}" width="${w}" height="${h*.28}" fill="#000" opacity=".12"/>${S[p.shape]}</svg>`;
+}
+
+// Page behaviour: rendering, carousels, cart, forms.
+// ---- currency (dummy fixed rates) ----
+const RATES={"USD $":[1,"$"],"EUR €":[.93,"€"],"GBP £":[.79,"£"],"CAD $":[1.38,"CA$"]};
+let cur="USD $";
+const money=n=>{const [r,s]=RATES[cur];return s+Math.round(n*r).toLocaleString()};
+
+// ---- render ----
+const $=id=>document.getElementById(id);
+$("catMenu").innerHTML=CATS.map(c=>`<a href="#prints">${c}</a>`).join("");
+$("heroArt").innerHTML=art({name:"Sardines and lemons",fg:"#2C47C9",bg:"#E9E4D6",shape:"fish"},600,420);
+function renderShelves(){
+  $("printTrack").innerHTML=PRINTS.map(p=>`<article class="card"><div class="art">${art(p)}</div><h3>${p.name}</h3><div class="meta">${p.cat} · 5×7 to 18×24</div><div class="price">From ${money(p.price)}</div><button class="btn ghost add" data-id="${p.id}">Add to cart</button></article>`).join("");
+  $("origTrack").innerHTML=ORIGINALS.map(p=>`<article class="card"><div class="art">${art(p)}${p.sold?'<span class="badge sold">Sold out</span>':p.was?'<span class="badge">Sale</span>':""}</div><h3>${p.name}</h3><div class="meta">Oil on panel · ${p.size}</div><div class="price">${money(p.price)}${p.was?`<s>${money(p.was)}</s>`:""}</div><button class="btn ghost add" data-id="${p.id}" ${p.sold?"disabled":""}>${p.sold?"Sold out":"Add to cart"}</button></article>`).join("");
+  document.querySelectorAll(".pager").forEach(updatePager);
+}
+
+// ---- carousels ----
+function updatePager(pg){
+  const t=$(pg.dataset.for),pages=Math.max(1,Math.ceil(t.scrollWidth/t.clientWidth-.05));
+  const page=Math.min(pages,Math.round(t.scrollLeft/t.clientWidth)+1);
+  pg.querySelector("span").textContent=`${page} / ${pages}`;
+}
+document.querySelectorAll(".pager").forEach(pg=>{
+  const t=$(pg.dataset.for),[prev,next]=pg.querySelectorAll("button");
+  prev.onclick=()=>t.scrollBy({left:-t.clientWidth});
+  next.onclick=()=>t.scrollBy({left:t.clientWidth});
+  t.addEventListener("scroll",()=>updatePager(pg),{passive:true});
+});
+addEventListener("resize",()=>document.querySelectorAll(".pager").forEach(updatePager));
+
+// ---- cart ----
+const cart=[];
+function addToCart(item){cart.push(item);renderCart();openCart();}
+function renderCart(){
+  $("cartCount").textContent=cart.length;
+  $("cartList").innerHTML=cart.length?cart.map((c,i)=>`<li>${c.art||'<svg viewBox="0 0 56 70"><rect width="56" height="70" fill="var(--accent)"/></svg>'}<div><div>${c.name}</div><div class="meta">${c.note||""}</div></div><div style="text-align:right"><div class="price">${money(c.price)}</div><button class="iconbtn" data-rm="${i}" style="padding:.1rem .5rem;font-size:.75rem">Remove</button></div></li>`).join(""):'<li class="meta" style="display:block">Your cart is empty.</li>';
+  $("cartTotal").textContent=money(cart.reduce((s,c)=>s+c.price,0));
+}
+function openCart(){$("drawer").hidden=$("scrim").hidden=false}
+function closeCart(){$("drawer").hidden=$("scrim").hidden=true}
+$("cartBtn").onclick=openCart;$("closeCart").onclick=$("scrim").onclick=$("keepShopping").onclick=closeCart;
+$("cartList").onclick=e=>{const i=e.target.dataset.rm;if(i!==undefined){cart.splice(+i,1);renderCart()}};
+$("checkout").onclick=()=>toast("Checkout is disabled in this demo.");
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".add");if(!b||b.disabled)return;
+  const p=[...PRINTS,...ORIGINALS].find(x=>x.id===b.dataset.id);
+  addToCart({name:p.name,price:p.price,note:p.cat?"Print · 5×7":"Original · "+p.size,art:art(p)});
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCart()});
+
+// ---- print club gift ----
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+$("bday").innerHTML=MONTHS.map((m,i)=>`<option ${i===2?"selected":""}>${m}</option>`).join("");
+let months=3;
+const planPrice=()=>+document.querySelector("input[name=plan]:checked").dataset.price;
+function clubTotal(){$("months").textContent=months;$("clubTotal").textContent=money(planPrice()*months)}
+$("mMinus").onclick=()=>{months=Math.max(1,months-1);clubTotal()};
+$("mPlus").onclick=()=>{months=Math.min(12,months+1);clubTotal()};
+document.querySelectorAll("input[name=plan]").forEach(r=>r.onchange=clubTotal);
+$("clubForm").onsubmit=e=>{e.preventDefault();const plan=document.querySelector("input[name=plan]:checked").value;
+  addToCart({name:`Print Club gift · ${plan}`,price:planPrice()*months,note:`${months} months · birthday in ${$("bday").value}`})};
+
+// ---- gift card ----
+const DENOMS=[25,50,75,100,150,250,500];let gc=50;
+function renderDenoms(){$("denoms").innerHTML=DENOMS.map(d=>`<label><input type="radio" name="gc" value="${d}" ${d===gc?"checked":""}>${money(d)}</label>`).join("");$("gcAmt").textContent=money(gc)}
+$("denoms").onchange=e=>{gc=+e.target.value;$("gcAmt").textContent=money(gc)};
+$("asGift").onchange=e=>$("recip").hidden=!e.target.checked;
+const msgLeft=()=>$("msgLeft").textContent=200-$("rMsg").value.length;$("rMsg").oninput=msgLeft;
+$("rDate").valueAsDate=new Date();
+$("giftForm").onsubmit=e=>{e.preventDefault();const g=$("asGift").checked;
+  if(g&&!$("rEmail").checkValidity()){toast("Enter a valid recipient email.");return}
+  addToCart({name:"Gift card",price:gc,note:g?`To ${$("rName").value||$("rEmail").value} on ${$("rDate").value}`:"Sent to you"})};
+
+// ---- newsletter + misc ----
+$("newsForm").onsubmit=e=>{e.preventDefault();toast("Subscribed (demo). Check your inbox for 10% off.");e.target.reset()};
+$("currency").onchange=e=>{cur=e.target.value;renderShelves();renderCart();clubTotal();renderDenoms()};
+let tt;function toast(m){const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+
+renderShelves();renderCart();clubTotal();renderDenoms();msgLeft();
+</script>
+</body>
+</html>
